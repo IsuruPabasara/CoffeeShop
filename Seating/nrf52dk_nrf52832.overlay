@@ -1,0 +1,38 @@
+// To get started, press Ctrl+Space to bring up the completion menu and view the available nodes.
+
+// You can also use the buttons in the sidebar to perform actions on nodes.
+// Actions currently available include:
+
+// * Enabling / disabling the node
+// * Adding the bus to a bus
+// * Removing the node
+// * Connecting ADC channels
+
+// For more help, browse the DeviceTree documentation at https://docs.zephyrproject.org/latest/guides/dts/index.html
+// You can also visit the nRF DeviceTree extension documentation at https://nrfconnect.github.io/vscode-nrf-connect/devicetree/nrfdevicetree.html
+
+&arduino_i2c {
+	my_lps22hh: my_lps22hh@5d {  // NOTE: names should be lowercase since DT compiler lowercases it.
+		compatible = "i2c-device";
+        reg = < 0x5d >;  // i2c 7-bit address is 0x5D, 8-bit ADDw (address + write) is 0xBA
+        label = "Pressure LPS22HH";
+		status = "okay";
+	};
+	my_stts751: my_stts751@4a {  // NOTE: names should be lowercase since DT compiler lowercases it.
+		compatible = "i2c-device";
+        reg = < 0x4a >;  // i2c 7-bit address is 0x4a, 8-bit ADDw (address + write) is 0x94
+        label = "Temperature STTS751";
+		status = "okay";
+	};
+};
+
+&i2c1 {
+    status = "okay";
+    clock-frequency = <I2C_BITRATE_STANDARD>;
+    my_ds3231: my_ds3231@68 {
+        compatible = "maxim,ds3231";
+        reg = <0x68>;
+        label = "DS3231";  
+        status = "okay";
+    };
+};

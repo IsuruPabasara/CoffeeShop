@@ -1,0 +1,225 @@
+#:kivy 2.1.0
+WindowManager:
+    MainWindow:
+    SeatingWindow:
+    ReceiptWindow:
+    OpenGateWindowEntry:
+    ExitWindow:
+    PaymentWindow:
+    OpenGateWindowExit:
+
+<MainWindow>:
+    name: "main"
+    GridLayout:
+        padding:30
+        cols:1
+        Label:
+            font_size:30
+            text: "Welcome to the coffee shop! "
+        GridLayout:
+            cols:2
+            padding:30
+            Button:
+                background_normal: ''
+                halign:'center'
+                background_color: (root.buttonColorGreen) if (root.seat1Available) else (root.buttonColorRed)
+                text: "Seat_1\n\nLast updated on : " + str(root.seat1Updated) 
+                disabled : True
+            Button:
+                background_normal: ''
+                halign:'center'
+                background_color: (root.buttonColorGreen) if (root.seat2Available) else (root.buttonColorRed)
+                text: "Seat_2\n\nLast updated on : " + str(root.seat2Updated) 
+                disabled : True
+        Label:
+            text: "The coffee shop has "+str(root.availableSpaces)+" open spots out of "+str(root.totSpaces)+" seating spaces"     
+        GridLayout:
+            cols:2
+            Button:
+                text: "Enter(Shop)" if (root.availableSpaces==0) else "Enter" 
+                disabled : True if (root.availableSpaces==0) else False
+                on_release:
+                    app.root.current = "seatingwindow"
+                    root.manager.transition.direction = "right"
+
+            Button:
+                text: "Exit" 
+                on_release:
+                    app.root.current = "exitwindow"
+                    root.manager.transition.direction = "left"
+
+<SeatingWindow>:
+    name: "seatingwindow"
+    GridLayout:
+        padding:30
+        cols:1
+        Label:
+            font_size:20
+            text: "Please enter the following details"
+        Label:
+            color: 1, .3, .4, .85
+            text: str(root.failReason)
+        GridLayout:
+            cols:2
+            padding:30
+            Label:
+                text: "What is your name?"
+            TextInput:
+                id: veh_id
+                multiline: False
+        GridLayout:
+            padding:20
+            cols:2
+            Button:
+                text: "Home"
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "left"
+            Button:
+                text: "Submit"
+                on_release:
+                    app.root.current = "receiptwindow" if root.get_spot(veh_id.text) != False else "seatingwindow"
+                    root.manager.transition.direction = "right"
+            
+<ReceiptWindow>:
+    name: "receiptwindow"
+    GridLayout:
+        padding:30
+        cols:1
+        Label:
+            font_size:20
+            text: "Your seating details are as follows"
+        GridLayout:
+            cols:2
+            Label:
+                font_size:20
+                halign:'right'
+                text: "Receipt number :"
+            Label:
+                font_size:15
+                text: str(root.receiptID)
+        GridLayout:
+            cols:2
+            Label:
+                font_size:20
+                halign:'right'
+                text: "Suggested seating spot :"
+            Label:
+                font_size:15
+                text: str(root.seatingSpace)
+        BoxLayout:
+            padding: [20, 20, 20, 20]
+            Button:
+                text: "Open gate"
+                on_release:
+                    app.root.current = "opengatewindowentry"
+                    root.manager.transition.direction = "right"
+
+<OpenGateWindowEntry>:
+    name: "opengatewindowentry"
+    GridLayout:
+        cols:1
+        padding:50
+        Button:
+            text: "Close gate"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "left"
+
+
+<ExitWindow>:
+    name: "exitwindow"
+    GridLayout:
+        padding:30
+        cols:1
+        Label:
+            font_size:20
+            text: "Please enter the following details"
+        Label:
+            color: 1, .3, .4, .85
+            text: str(root.failReason)
+        GridLayout:
+            cols:2
+            padding:30
+            Label:
+                text: "What is your receipt number?"
+            TextInput:
+                id: receipt_id
+                multiline: False
+        GridLayout:
+            padding:20
+            cols:2
+            Button:
+                text: "Home"
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+            Button:
+                text: "Submit"
+                on_release:
+                    app.root.current = "paymentwindow" if root.get_cost(receipt_id.text) != False else "exitwindow"
+                    root.manager.transition.direction = "left"
+
+<PaymentWindow>:
+    name: "paymentwindow"
+    GridLayout:
+        padding:30
+        cols:1
+        Label:
+            font_size:20
+            text: "Your payment details"
+        Label:
+            color: 1, .3, .4, .85
+            text: str(root.failReason)
+        GridLayout:
+            cols:2
+            Label:
+                font_size:20
+                halign:'right'
+                text: "Your cost is :"
+            Label:
+                font_size:15
+                text: str(root.seatingCost)
+        GridLayout:
+            cols:2
+            padding:30
+            Label:
+                text: "Debit amount :"
+            TextInput:
+                id: payment_amount
+                multiline: False
+        GridLayout:
+            padding:20
+            cols:2
+            Button:
+                text: "Home"
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+            Button:
+                text: "Pay"
+                on_release:
+                    app.root.current = "opengatewindowexit" if root.get_balance(payment_amount.text) !=False else "paymentwindow"
+                    root.manager.transition.direction = "left"
+
+<OpenGateWindowExit>:
+    name: "opengatewindowexit"
+    GridLayout:
+        padding:30
+        cols:1
+        GridLayout:
+            cols:2
+            Label:
+                font_size:20
+                halign:'right'
+                text: "Your balance is :"
+            Label:
+                font_size:15
+                text: str(root.seatingBalance)
+        BoxLayout:
+            padding: [20, 20, 20, 20]
+            Button:
+                text: "Close gate"
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
