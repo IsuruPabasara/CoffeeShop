@@ -3,6 +3,5 @@ Used the nRF52 development kit as peripherals(seats) and a laptop(welcome regist
 so the whole setup can be wireless and low power consuming. 
 Used Kivy to write a simple GUI for visual feedback.
 
-<img src="https://github.com/IsuruPabasara/CoffeeShop/blob/main/MC.jpeg" width="100" height="100">
-![alt text](https://github.com/IsuruPabasara/CoffeeShop/blob/main/MC.jpeg | width=100)
-![alt text](https://github.com/IsuruPabasara/CoffeeShop/blob/main/Slide1.JPG)
+<img src="https://github.com/IsuruPabasara/CoffeeShop/blob/main/MC.jpeg" width="400" >
+<img src="https://github.com/IsuruPabasara/CoffeeShop/blob/main/Slide1.JPG" width="400" >
