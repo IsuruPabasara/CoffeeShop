@@ -4,6 +4,6 @@ so the whole setup can be wireless and low power consuming.
 Used Kivy to write a simple GUI for visual feedback.
 
 <p float="left">  
-  <img src="https://github.com/IsuruPabasara/CoffeeShop/blob/main/MC.jpeg" height="300"  >
-  <img src="https://github.com/IsuruPabasara/CoffeeShop/blob/main/Slide1.JPG" height="300" >
+  <img src="https://github.com/IsuruPabasara/CoffeeShop/blob/main/MC.jpeg" height="250"  >
+  <img src="https://github.com/IsuruPabasara/CoffeeShop/blob/main/Slide1.JPG" height="250" >
 </p>
