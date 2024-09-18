@@ -4,4 +4,4 @@ so the whole setup can be wireless and low power consuming.
 Used Kivy to write a simple GUI for visual feedback.
 
 ![alt text](https://github.com/IsuruPabasara/CoffeeShop/blob/main/MC.jpeg)
-![alt text](https://github.com/IsuruPabasara/CoffeeShop/blob/main/Slide1.jpeg)
+![alt text](https://github.com/IsuruPabasara/CoffeeShop/blob/main/Slide1.JPG)
